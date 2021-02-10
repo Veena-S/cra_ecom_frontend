@@ -1,9 +1,13 @@
 import React, { useState, useContext } from "react";
-import {eComContext} from './eComContext.js'
+// import {eComContext} from './eComContext.js'
+import {addCartAction, EcomContext} from '../store.js'
 
-export default function ItemDetail({ item }) {
+export default function ItemDetail() {
   const [quantity, setQuantity] = useState(1);
-  const eComCurrContext = useContext(eComContext)
+  // const eComCurrContext = useContext(eComContext)
+  const {store, dispatch} = useContext(EcomContext);
+  const {items, currentItemIndex} = store;
+  const item = items[currentItemIndex];
 
   if (!item) {
     return <div></div>;
@@ -14,7 +18,9 @@ export default function ItemDetail({ item }) {
   };
 
   const detailAddCart = () => {
-    eComCurrContext.addToCart(item, quantity);
+    // eComCurrContext.addToCart(item, quantity);
+    // Reducer
+    dispatch(addCartAction(item, quantity));
   };
 
   return (
