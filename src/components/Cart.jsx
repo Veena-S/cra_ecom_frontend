@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import {eComContext} from './eComContext.js'
 
-export default function Cart({ items, emptyCart }) {
+export default function Cart({ items }) {
   const [orderId, setOrderId] = useState(null);
+  const eComCurrContext = useContext(eComContext)
 
   if (items.length === 0) {
     if (orderId) {
@@ -39,7 +41,7 @@ export default function Cart({ items, emptyCart }) {
     const order = { total, items };
     axios.post('/orders', order).then((result) => {
       setOrderId(result.data.order.id);
-      emptyCart();
+      eComCurrContext.emptyCart();
       console.log(result);
     });
   };

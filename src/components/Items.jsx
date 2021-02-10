@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {eComContext} from './eComContext.js'
 
-export default function Items({ items, setItemDetail }) {
+export default function Items({ items }) {
   const [selectedItemIndex, setSelectedItemIndex] = useState();
+  const eComCurrContext = useContext(eComContext)
 
   const setItemSelected = (item, index) => {
-    setItemDetail(index);
+    eComCurrContext.setItemDetail(index);
     setSelectedItemIndex(index);
   };
 
